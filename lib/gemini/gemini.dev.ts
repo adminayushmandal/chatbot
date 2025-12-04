@@ -1,6 +1,6 @@
-import {z} from "zod";
-import {ApiError, GoogleGenAI} from "@google/genai";
-import {zodToJsonSchema} from "zod-to-json-schema";
+import { z } from "zod";
+import { ApiError, GoogleGenAI } from "@google/genai";
+import { zodToJsonSchema } from "zod-to-json-schema";
 
 const ingredients = z.object({
     name: z.string().describe("The name of the ingredient"),
@@ -15,7 +15,7 @@ const recipeSchema = z.object({
 })
 
 const ai = new GoogleGenAI({
-    apiKey: "AIzaSyDtor1Ggp_FLEMwe1E31HgNwcwnVI1Ku7o"
+    apiKey: process.env.NODE_ENV === 'development' ? process.env['NEXT_PUBLIC_API_KEY'] : process.env['API_KEY']
 })
 
 const prompt = `
